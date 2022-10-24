@@ -7,7 +7,7 @@ import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Piatto;
 public interface PiattoDao {
 	public List<Piatto> findAll();
 	
-	public Piatto findByPrimaryKey();
+	public Piatto findByPrimaryKey(Long id);
 	
 	public void saveOrUpdate(Piatto piatto);
 	
