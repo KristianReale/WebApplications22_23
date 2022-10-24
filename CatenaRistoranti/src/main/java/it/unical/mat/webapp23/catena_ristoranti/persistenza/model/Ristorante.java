@@ -23,7 +23,6 @@ public class Ristorante {
 	public String getUbicazione() {
 		return ubicazione;
 	}
-	
 	public void setUbicazione(String ubicazione) {
 		this.ubicazione = ubicazione;
 	}
@@ -33,7 +32,6 @@ public class Ristorante {
 	public void setPiatti(List<Piatto> piatti) {
 		this.piatti = piatti;
 	}
-	
 	
 	
 	
