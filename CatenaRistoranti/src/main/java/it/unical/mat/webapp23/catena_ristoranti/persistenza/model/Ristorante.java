@@ -23,7 +23,10 @@ public class Ristorante {
 	public String getUbicazione() {
 		return ubicazione;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/KristianReale/WebApplications22_23.git
 	public void setUbicazione(String ubicazione) {
 		this.ubicazione = ubicazione;
 	}
