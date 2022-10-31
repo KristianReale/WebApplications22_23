@@ -10,4 +10,4 @@ public class CatenaRistorantiApplication {
 		SpringApplication.run(CatenaRistorantiApplication.class, args);
 	}
 
-}
+} 

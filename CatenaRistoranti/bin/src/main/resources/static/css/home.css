@@ -1,0 +1,38 @@
+#titolo{
+	color: red;
+}
+
+h1, h2{
+	text-align: center;
+}
+
+.sottolineato{
+	text-decoration: underline;
+}
+
+a:-webkit-any-link {
+    /*text-decoration: none;*/
+}
+
+figcaption>h4 {
+	font-size: smaller;
+}
+
+.cibo{
+	font-weight: bold;
+}
+
+article+article{
+	margin-left:3%;
+
+}
+
+img{
+	width : 100%;
+}
+
+.jumbotron{
+	padding-top:10px !important;
+}
+
+
