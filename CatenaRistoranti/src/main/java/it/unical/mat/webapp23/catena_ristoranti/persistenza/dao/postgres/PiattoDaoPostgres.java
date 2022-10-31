@@ -67,10 +67,11 @@ public class PiattoDaoPostgres implements PiattoDao{
 					piatto.setRistoranti(new ArrayList<Ristorante>());
 				}
 				Ristorante r = new Ristorante();
-				r.setNome(rs.getString("nome"));
+				r.setId(rs.getLong("r.id"));
+				r.setNome(rs.getString("r.nome"));
+				r.setUbicazione(rs.getString("r.cap_ubicazione"));
 				piatto.getRistoranti().add(r);
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
