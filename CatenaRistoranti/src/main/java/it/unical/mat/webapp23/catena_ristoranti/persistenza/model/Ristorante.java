@@ -1,12 +1,9 @@
 package it.unical.mat.webapp23.catena_ristoranti.persistenza.model;
 
-import java.util.List;
-
 public class Ristorante {
 	private Long id;
 	private String nome;
 	private String ubicazione;
-//	private List<Piatto> piatti;
 	
 	public Long getId() {
 		return id;
@@ -26,12 +23,6 @@ public class Ristorante {
 	public void setUbicazione(String ubicazione) {
 		this.ubicazione = ubicazione;
 	}
-//	public List<Piatto> getPiatti() {
-//		return piatti;
-//	}
-//	public void setPiatti(List<Piatto> piatti) {
-//		this.piatti = piatti;
-//	}
 	
 	
 	

@@ -48,7 +48,8 @@ public class PiattoDaoPostgres implements PiattoDao{
 	@Override
 	public Piatto findByPrimaryKey(Long id) {
 		Piatto piatto = null;
-		String query = "select * from piatto p, serve s, ristorante r "
+		String query = "select p.id as p_id, p.nome as p_nome, r.id as r_id, r.nome as r_nome, r.cap_ubicazione as r_cap_ubicazione  "
+				+ " from piatto p, serve s, ristorante r "
 				+ "where p.id = s.piatto and "
 				+ "		 s.ristorante = r.id "
 				+ "	and p.id = ?";
@@ -62,14 +63,14 @@ public class PiattoDaoPostgres implements PiattoDao{
 			while (rs.next()) {
 				if (piatto == null) {
 					piatto = new Piatto();
-					piatto.setId(rs.getLong("p.id"));
-					piatto.setNome(rs.getString("p.nome"));
+					piatto.setId(rs.getLong("p_id"));
+					piatto.setNome(rs.getString("p_nome"));
 					piatto.setRistoranti(new ArrayList<Ristorante>());
 				}
 				Ristorante r = new Ristorante();
-				r.setId(rs.getLong("r.id"));
-				r.setNome(rs.getString("r.nome"));
-				r.setUbicazione(rs.getString("r.cap_ubicazione"));
+				r.setId(rs.getLong("r_id"));
+				r.setNome(rs.getString("r_nome"));
+				r.setUbicazione(rs.getString("r_cap_ubicazione"));
 				piatto.getRistoranti().add(r);
 			}
 		} catch (SQLException e) {
