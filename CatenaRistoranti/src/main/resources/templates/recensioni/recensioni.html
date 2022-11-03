@@ -10,8 +10,18 @@
 	<table border="1">
 		<tr> 
 			<th>Nome Ristorante</th>
+			<th>CAP Ubicazione</th>
+			<!--  
 			<th>Numero Recensioni</th>
+			-->
 		</tr>
+		
+		<tr th:each="rist : ${lista_ristoranti}" th:object="${rist}">
+			<td th:text="*{nome}"></td>
+			<td th:text="${rist.ubicazione}"></td>
+		</tr>
+		
+		<!-- 
 		<tr>
 			<td>Ristorante/Pizzeria le Casette di Zio Santino</td>
 			<td>45</td>
@@ -36,6 +46,7 @@
 			<td>Cicciò</td>
 			<td>11</td>
 		</tr>
+		 -->
 	</table>
 	<a href="../index.html"><< Torna alla Home Page (versione percorso relativo)</a><br/>
 		<a href="/"><< Torna alla Home Page (versione percorso assoluto)</a>

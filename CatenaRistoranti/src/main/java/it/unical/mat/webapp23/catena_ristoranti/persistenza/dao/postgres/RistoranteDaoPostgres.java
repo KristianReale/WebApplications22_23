@@ -32,6 +32,7 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 				Ristorante ristorante = new Ristorante();
 				ristorante.setId(rs.getLong("id"));
 				ristorante.setNome(rs.getString("nome"));
+				ristorante.setUbicazione(rs.getString("cap_ubicazione"));
 				ristoranti.add(ristorante);
 			}
 			
