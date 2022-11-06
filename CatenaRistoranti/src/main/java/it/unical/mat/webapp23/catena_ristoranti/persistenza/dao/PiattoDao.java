@@ -14,6 +14,6 @@ public interface PiattoDao {
 	
 	public void delete(Piatto piatto);
 	
-	public List<Piatto> findByRestaurant(Ristorante ristorante);
+	public List<Piatto> findByRestaurantLazy(Ristorante ristorante);
 	
 }

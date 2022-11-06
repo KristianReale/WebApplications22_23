@@ -202,7 +202,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 	}
 	
 	@Override
-	public List<Piatto> findByRestaurant(Ristorante ristorante) {
+	public List<Piatto> findByRestaurantLazy(Ristorante ristorante) {
 		//TODO AS EXERCISE WITH PROXY
 		return null;
 	}
