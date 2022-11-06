@@ -3,9 +3,9 @@ package it.unical.mat.webapp23.catena_ristoranti.persistenza.model;
 import java.util.List;
 
 public class Piatto {
-	private Long id;
-	private String nome;
-	private List<Ristorante> ristoranti;
+	Long id;
+	String nome;
+	List<Ristorante> ristoranti;
 	
 	public Long getId() {
 		return id;

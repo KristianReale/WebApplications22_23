@@ -1,4 +1,4 @@
-package it.unical.mat.webapp23.catena_ristoranti;
+package it.unical.mat.webapp23.catena_ristoranti.persistenza.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -141,4 +141,20 @@ public class DatabaseTest {
 		}
 	}
 	
+	@Test
+	public void piattiDiRistorante() {
+		PiattoDao pDao = DBManager.getInstance().getPiattoDao();
+		Ristorante r = DBManager.getInstance().getRistoranteDao()
+						.findByPrimaryKey(1L);
+		List<Piatto> piatti = pDao.findByRestaurantLazy(r);
+		for (Piatto p : piatti) {
+			System.out.println("Piatto: " + p.getNome());
+			assertNull(p.ristoranti);
+			List<Ristorante> ristsOfPiatto = p.getRistoranti();
+			assertNotNull(p.ristoranti);
+			for (Ristorante rP : ristsOfPiatto) {
+				System.out.println("--- " + rP.getNome());
+			}
+		}
+	}
 }
