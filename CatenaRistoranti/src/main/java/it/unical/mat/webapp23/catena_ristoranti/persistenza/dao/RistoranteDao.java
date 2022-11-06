@@ -9,8 +9,7 @@ public interface RistoranteDao {
 	
 	public Ristorante findByPrimaryKey(Long id);
 	
-	public void saveOrUpdate(Ristorante piatto);
+	public void saveOrUpdate(Ristorante ristorante);
 	
-	public void delete(Ristorante piatto);
-	
+	public void delete(Ristorante ristorante);	
 }

@@ -57,6 +57,7 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 				ristorante = new Ristorante();
 				ristorante.setId(rs.getLong("id"));
 				ristorante.setNome(rs.getString("nome"));
+				ristorante.setUbicazione(rs.getString("cap_ubicazione"));
 			}
 			
 		} catch (SQLException e) {
@@ -68,7 +69,6 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 
 	@Override
 	public void saveOrUpdate(Ristorante ristorante) {
-		
 		if (ristorante.getId() == null) {
 			String insertStr = "INSERT INTO ristorante VALUES (?, ?, ?)";
 			
@@ -109,17 +109,20 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void delete(Ristorante ristorante) {
-		// TODO Auto-generated method stub
-		
+		String query = "DELETE FROM ristorante WHERE id = ?";		
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setLong(1, ristorante.getId());
+			st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

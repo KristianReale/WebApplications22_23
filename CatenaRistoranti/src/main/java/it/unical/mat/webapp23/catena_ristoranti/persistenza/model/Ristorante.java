@@ -4,7 +4,7 @@ public class Ristorante {
 	private Long id;
 	private String nome;
 	private String ubicazione;
-	
+	 
 	public Long getId() {
 		return id;
 	}
@@ -23,7 +23,4 @@ public class Ristorante {
 	public void setUbicazione(String ubicazione) {
 		this.ubicazione = ubicazione;
 	}
-	
-	
-	
 }
