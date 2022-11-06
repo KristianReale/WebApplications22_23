@@ -7,9 +7,9 @@ import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Utente;
 public interface UtenteDao {
 	public List<Utente> findAll();
 	
-	public Utente findByPrimaryKey(Long id);
+	public Utente findByPrimaryKey(String username);
 	
-	public void saveOrUpdate(Utente piatto);
+	public void saveOrUpdate(Utente utente);
 	
-	public void delete(Utente piatto);
+	public void delete(Utente utente);
 }

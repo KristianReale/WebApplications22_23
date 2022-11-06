@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.PiattoDao;
+import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.RecensioneDao;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.RistoranteDao;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.UtenteDao;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.postgres.PiattoDaoPostgres;
+import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.postgres.RecensioneDaoPostgres;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.postgres.RistoranteDaoPostgres;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.postgres.UtenteDaoPostgres;
 
@@ -47,5 +49,9 @@ public class DBManager {
 	
 	public RistoranteDao getRistoranteDao() {
 		return new RistoranteDaoPostgres(getConnection());
+	}
+	
+	public RecensioneDao getRecensioneDao() {
+		return new RecensioneDaoPostgres(getConnection());
 	}
 }

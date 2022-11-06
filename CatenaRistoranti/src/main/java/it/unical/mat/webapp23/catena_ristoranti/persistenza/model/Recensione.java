@@ -9,6 +9,11 @@ public class Recensione {
 	Utente scrittaDa;
 	Ristorante ristorante;
 	
+	public Recensione() {
+		numeroMiPiace = 0;
+		numeroNonMiPiace = 0;
+	}
+	
 	public Long getId() {
 		return id;
 	}
