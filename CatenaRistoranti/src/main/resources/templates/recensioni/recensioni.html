@@ -11,14 +11,18 @@
 		<tr> 
 			<th>Nome Ristorante</th>
 			<th>CAP Ubicazione</th>
+			<th>Piatti serviti</th>
 			<!--  
 			<th>Numero Recensioni</th>
 			-->
 		</tr>
 		
-		<tr th:each="rist : ${lista_ristoranti}" th:object="${rist}">
-			<td th:text="*{nome}"></td>
-			<td th:text="${rist.ubicazione}"></td>
+		<tr th:each="ristPiatto : ${lista_ristoranti}" >
+			<td th:text="${ristPiatto.ristorante.nome}"></td>
+			<td th:text="${ristPiatto.ristorante.ubicazione}"></td>
+			<!-- Commento Scorrere i piatti 
+			<td th:text="${ristPiatto.ristorante.ubicazione}"></td>
+			-->
 		</tr>
 		
 		<!-- 
