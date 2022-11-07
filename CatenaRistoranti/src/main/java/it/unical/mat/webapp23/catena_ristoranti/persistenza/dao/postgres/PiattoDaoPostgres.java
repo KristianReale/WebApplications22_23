@@ -203,8 +203,34 @@ public class PiattoDaoPostgres implements PiattoDao{
 	
 	@Override
 	public List<Piatto> findByRestaurantLazy(Ristorante ristorante) {
-		//TODO AS EXERCISE WITH PROXY
-		return null;
+		List<Piatto> piatti = new ArrayList<Piatto>();
+		
+		String query = "select p.id as p_id, p.nome as p_nome "
+				+ " from piatto p, serve s, ristorante r "
+				+ "where p.id = s.piatto and "
+				+ "		 s.ristorante = r.id "
+				+ "and r.id = ?";
+		
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setLong(1, ristorante.getId());
+		
+			ResultSet rs = st.executeQuery();
+			
+			while (rs.next()) {
+				Piatto piatto = new PiattoProxy(conn);
+				piatto.setId(rs.getLong("p_id"));
+				piatto.setNome(rs.getString("p_nome"));				
+				piatti.add(piatto);
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return piatti;
 	}
 
 }
