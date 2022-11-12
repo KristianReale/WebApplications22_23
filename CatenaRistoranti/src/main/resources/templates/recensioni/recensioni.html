@@ -20,6 +20,8 @@
 		<tr th:each="ristPiatto : ${lista_ristoranti}" >
 			<td th:text="${ristPiatto.ristorante.nome}"></td>
 			<td th:text="${ristPiatto.ristorante.ubicazione}"></td>
+			
+			
 			<td>
 				<span th:each="piatto : ${ristPiatto.piatti}" >
 					<span th:text="${piatto.nome}">						
