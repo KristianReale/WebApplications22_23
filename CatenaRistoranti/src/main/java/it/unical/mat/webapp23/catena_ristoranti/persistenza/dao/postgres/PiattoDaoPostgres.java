@@ -28,7 +28,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 		HashMap<Long, Piatto> idsPiatti = new HashMap<Long, Piatto>();
 		List<Piatto> piatti = new ArrayList<Piatto>();
 		
-		String query = "select p.id as p_id, p.nome as p_nome, r.id as r_id, r.nome as r_nome, r.cap_ubicazione as r_cap_ubicazione  "
+		String query = "select p.id as p_id, p.nome as p_nome, p.prezzo as p_prezzo, r.id as r_id, r.nome as r_nome, r.descrizione as r_descrizione, r.cap_ubicazione as r_cap_ubicazione  "
 				+ " from piatto p, serve s, ristorante r "
 				+ "where p.id = s.piatto and "
 				+ "		 s.ristorante = r.id ";
@@ -44,6 +44,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 					piatto = new Piatto();
 					piatto.setId(rs.getLong("p_id"));
 					piatto.setNome(rs.getString("p_nome"));
+					piatto.setPrezzo(rs.getBigDecimal("p_prezzo"));
 					piatto.setRistoranti(new ArrayList<Ristorante>());
 					idsPiatti.put(rs.getLong("p_id"), piatto);
 					piatti.add(piatto);
@@ -51,6 +52,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 				Ristorante rist = new Ristorante();
 				rist.setId(rs.getLong("r_id"));
 				rist.setNome(rs.getString("r_nome"));
+				rist.setDescrizione(rs.getString("r_descrizione"));
 				rist.setUbicazione(rs.getString("r_cap_ubicazione"));
 				piatto.getRistoranti().add(rist);
 			}
@@ -65,7 +67,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 	@Override
 	public Piatto findByPrimaryKey(Long id) {
 		Piatto piatto = null;
-		String query = "select p.id as p_id, p.nome as p_nome, r.id as r_id, r.nome as r_nome, r.cap_ubicazione as r_cap_ubicazione  "
+		String query = "select p.id as p_id, p.nome as p_nome, p.prezzo as p_prezzo, r.id as r_id, r.nome as r_nome, r.descrizione as r_descrizione, r.cap_ubicazione as r_cap_ubicazione  "
 				+ " from piatto p, serve s, ristorante r "
 				+ "where p.id = s.piatto and "
 				+ "		 s.ristorante = r.id "
@@ -82,11 +84,13 @@ public class PiattoDaoPostgres implements PiattoDao{
 					piatto = new Piatto();
 					piatto.setId(rs.getLong("p_id"));
 					piatto.setNome(rs.getString("p_nome"));
+					piatto.setPrezzo(rs.getBigDecimal("p_prezzo"));
 					piatto.setRistoranti(new ArrayList<Ristorante>());
 				}
 				Ristorante r = new Ristorante();
 				r.setId(rs.getLong("r_id"));
 				r.setNome(rs.getString("r_nome"));
+				r.setDescrizione(rs.getString("r_descrizione"));
 				r.setUbicazione(rs.getString("r_cap_ubicazione"));
 				piatto.getRistoranti().add(r);
 			}
@@ -100,7 +104,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 	@Override
 	public void saveOrUpdate(Piatto piatto) {
 		if (piatto.getId() == null) {
-			String insertStr = "INSERT INTO piatto VALUES (?, ?)";
+			String insertStr = "INSERT INTO piatto VALUES (?, ?, ?)";
 			
 			try {
 				PreparedStatement st = conn.prepareStatement(insertStr);
@@ -110,6 +114,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 				
 				st.setLong(1, newId);
 				st.setString(2, piatto.getNome());
+				st.setBigDecimal(3, piatto.getPrezzo());
 				st.executeUpdate();
 				
 				RistoranteDao rDao = DBManager.getInstance().getRistoranteDao();
@@ -133,7 +138,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 				e.printStackTrace();
 			}
 		}else {
-			String updateStr = "UPDATE piatto set nome = ?, "
+			String updateStr = "UPDATE piatto set nome = ?, prezzo = ? "
 													+ "where id = ?";
 			
 			PreparedStatement st;
@@ -141,7 +146,8 @@ public class PiattoDaoPostgres implements PiattoDao{
 				st = conn.prepareStatement(updateStr);
 			
 				st.setString(1, piatto.getNome());
-				st.setLong(2, piatto.getId());							
+				st.setBigDecimal(2, piatto.getPrezzo());
+				st.setLong(3, piatto.getId());							
 				
 				st.executeUpdate();
 				
@@ -157,8 +163,8 @@ public class PiattoDaoPostgres implements PiattoDao{
 					ResultSet rsCheck = stCheckServe.executeQuery();
 					PreparedStatement stServe;
 					if (rsCheck.next()) {
-						String serveStr = "UPDATE serve SET piatto = ? and ristorante = ?"
-															+ "WHERE id = ?)";						
+						String serveStr = "UPDATE serve SET piatto = ?, ristorante = ? "
+															+ "WHERE id = ?";						
 						stServe = conn.prepareStatement(serveStr);
 						
 						stServe.setLong(1, piatto.getId());
@@ -205,7 +211,7 @@ public class PiattoDaoPostgres implements PiattoDao{
 	public List<Piatto> findByRestaurantLazy(Ristorante ristorante) {
 		List<Piatto> piatti = new ArrayList<Piatto>();
 		
-		String query = "select p.id as p_id, p.nome as p_nome "
+		String query = "select p.id as p_id, p.nome as p_nome, p.prezzo as p_prezzo "
 				+ " from piatto p, serve s, ristorante r "
 				+ "where p.id = s.piatto and "
 				+ "		 s.ristorante = r.id "
@@ -220,7 +226,8 @@ public class PiattoDaoPostgres implements PiattoDao{
 			while (rs.next()) {
 				Piatto piatto = new PiattoProxy(conn);
 				piatto.setId(rs.getLong("p_id"));
-				piatto.setNome(rs.getString("p_nome"));				
+				piatto.setNome(rs.getString("p_nome"));		
+				piatto.setPrezzo(rs.getBigDecimal("p_prezzo"));
 				piatti.add(piatto);
 				
 				

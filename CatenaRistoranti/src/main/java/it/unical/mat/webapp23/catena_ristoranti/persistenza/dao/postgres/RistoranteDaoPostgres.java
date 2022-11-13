@@ -32,6 +32,7 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 				Ristorante ristorante = new Ristorante();
 				ristorante.setId(rs.getLong("id"));
 				ristorante.setNome(rs.getString("nome"));
+				ristorante.setDescrizione(rs.getString("descrizione"));
 				ristorante.setUbicazione(rs.getString("cap_ubicazione"));
 				ristoranti.add(ristorante);
 			}
@@ -57,6 +58,7 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 				ristorante = new Ristorante();
 				ristorante.setId(rs.getLong("id"));
 				ristorante.setNome(rs.getString("nome"));
+				ristorante.setDescrizione(rs.getString("descrizione"));
 				ristorante.setUbicazione(rs.getString("cap_ubicazione"));
 			}
 			
@@ -70,7 +72,7 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 	@Override
 	public void saveOrUpdate(Ristorante ristorante) {
 		if (ristorante.getId() == null) {
-			String insertStr = "INSERT INTO ristorante VALUES (?, ?, ?)";
+			String insertStr = "INSERT INTO ristorante VALUES (?, ?, ?, ?)";
 			
 			PreparedStatement st;
 			try {
@@ -82,6 +84,7 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 				st.setLong(1, newId);
 				st.setString(2, ristorante.getNome());
 				st.setString(3, ristorante.getUbicazione());
+				st.setString(4, ristorante.getDescrizione());
 				
 				st.executeUpdate();
 				
@@ -90,16 +93,17 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 				e.printStackTrace();
 			}
 		}else {
-			String updateStr = "UPDATE ristorante set nome = ?, cap_ubicazione = ? where id = ?";
+			String updateStr = "UPDATE ristorante set nome = ?, descrizione = ?, cap_ubicazione = ? where id = ?";
 			
 			PreparedStatement st;
 			try {
 				st = conn.prepareStatement(updateStr);
 			
 				st.setString(1, ristorante.getNome());
-				st.setString(2, ristorante.getUbicazione());
+				st.setString(2, ristorante.getDescrizione());
+				st.setString(3, ristorante.getUbicazione());
 				
-				st.setLong(3, ristorante.getId());
+				st.setLong(4, ristorante.getId());
 				
 				
 				

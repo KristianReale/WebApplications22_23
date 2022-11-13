@@ -3,6 +3,7 @@ package it.unical.mat.webapp23.catena_ristoranti.persistenza.model;
 public class Ristorante {
 	private Long id;
 	private String nome;
+	private String descrizione;
 	private String ubicazione;
 	 
 	public Long getId() {
@@ -16,6 +17,12 @@ public class Ristorante {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 	public String getUbicazione() {
 		return ubicazione;

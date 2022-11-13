@@ -1,10 +1,12 @@
 package it.unical.mat.webapp23.catena_ristoranti.persistenza.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Piatto {
 	Long id;
 	String nome;
+	BigDecimal prezzo;
 	List<Ristorante> ristoranti;
 	
 	public Long getId() {
@@ -24,6 +26,12 @@ public class Piatto {
 	}
 	public void setRistoranti(List<Ristorante> ristoranti) {
 		this.ristoranti = ristoranti;
+	}
+	public BigDecimal getPrezzo() {
+		return prezzo;
+	}
+	public void setPrezzo(BigDecimal prezzo) {
+		this.prezzo = prezzo;
 	}
 	
 	
