@@ -5,6 +5,49 @@ function Piatto(id, prezzo){
 
 piatti = new Object();
 const maxPrice = 34;
+//alert(maxPrice);
+
+window.addEventListener("load", function(){
+	var elForm = document.getElementsByTagName("form")[0];
+	elForm.addEventListener("submit", function(event){
+		var txtNome = document.getElementById("nome"); 
+		var txtDescrizione = document.getElementById("descrizione"); 
+		var txtUbicazione = document.getElementById("ubicazione"); 
+		validateRistorante(txtNome, txtDescrizione, txtUbicazione, event);
+	});
+	
+	var butAdd = document.getElementById("aggiungi");
+	butAdd.addEventListener("click", function(event){
+		var txtNome = document.getElementById("nome"); 
+		var txtDescrizione = document.getElementById("descrizione"); 
+		var txtUbicazione = document.getElementById("ubicazione");
+		var nome = txtNome.value;
+		var descrizione = txtDescrizione.value;
+		var ubicazione = txtUbicazione.value;
+		
+		var newTr = document.createElement("tr");
+		var newTdNome = document.createElement("td");
+		var newTdDescrizione = document.createElement("td");
+		var newTdUbicazione = document.createElement("td");
+		var txNome = document.createTextNode(nome);
+		var txDescrizione = document.createTextNode(descrizione);
+		var txUbicazione = document.createTextNode(ubicazione);
+		
+		newTdNome.appendChild(txNome);
+		newTdDescrizione.appendChild(txDescrizione);
+		newTdUbicazione.appendChild(txUbicazione);
+		
+		newTr.appendChild(newTdNome);
+		newTr.appendChild(newTdDescrizione);
+		newTr.appendChild(newTdUbicazione);
+		
+		var table = document.querySelector("table");
+
+		
+		table.appendChild(newTr);
+	});
+});
+
 
 function validateLogin(username, password, e){
 	if (username.value == ""){
@@ -64,7 +107,7 @@ function validateRistorante(txtNome, txtDescrizione, txtUbicazione, ev){
 function calculateTotalPrice(){
 	var sommaPrezzi = 0;
 	
-	for (var piattoId in piatti){
+	for (let piattoId in piatti){
 		sommaPrezzi += (piatti[piattoId].prezzo);
 	}
 	return sommaPrezzi;

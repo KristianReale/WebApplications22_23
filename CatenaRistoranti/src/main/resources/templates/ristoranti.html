@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="UTF-8">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+		<script src="js/validate.js" ></script>
+		<title>Ristoranti</title>
+
+</head>
+<body class="container">
+<!--  commento -->
+	<p>In questa tabella puoi trovare tutti i ristoranti dove è possibile scrivere recensioni</p>
+	<table border="1">
+		<tr> 
+			<th>Nome Ristorante</th>
+			<th>Descrizione</th>
+			<th>CAP Ubicazione</th>
+
+		</tr>
+		
+		<tr th:each="rist : ${lista_ristoranti}" >
+			<td th:text="${rist.nome}"></td>
+			<td th:text="${rist.descrizione}"></td>
+			<td th:text="${rist.ubicazione}"></td>
+
+		</tr>
+	
+	</table>
+	<h2>Aggiungi un nuovo ristorante</h2>
+		<form method="post" action="/doAddRestaurant" class="container" >
+		<label for="nome">Nome Ristorante:*</label> 
+		<input class="form-control" type="text" 
+				placeholder="Nome ristorante"
+				name="nome"
+				id="nome"/>
+				
+		<label for="descrizione">Descrizione:*</label> 
+		<input class="form-control" type="text" 
+				placeholder="Descrizione ristorante"
+				name="descrizione"
+				id="descrizione"/>
+				
+		<label for="ubicazione">Cap Ubicazione:*</label> 
+		<input class="form-control" type="text" 
+				placeholder="Ubicazione ristorante"
+				name="ubicazione"
+				id="ubicazione"/>
+		<div th:each="piatto : ${piatti}" >
+			<label class="form-check-label">
+				<input type="checkbox" name="piatto" th:value="${piatto.id}"
+					th:onchange = "|selezionaPiatto(${piatto.id}, ${piatto.prezzo}, event);|" />
+				<span th:text="${piatto.nome}"> </span>
+				Prezzo: <strong>
+					<span th:text="${piatto.prezzo}"> </span>
+					</strong>
+					
+			</label>
+		</div>
+				 
+		<input type="button" id="aggiungi" class="btn btn-primary" value="Aggiungi Ristorante" />
+		<input type="submit" class="btn btn-success" value="SALVA"/>
+			
+	</form>
+	
+</body>
+</html>

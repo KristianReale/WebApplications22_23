@@ -10,10 +10,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	
 	<script language="javascript" src="js/validate.js"></script>
+	
 </head>
 <body>
-	<form method="post" action="/doAddRestaurant" class="container" 
-						onsubmit="validateRistorante(nome, descrizione, ubicazione, event);">
+	<!--  onsubmit="validateRistorante(nome, descrizione, ubicazione, event);"-->
+			
+	<form method="post" action="/doAddRestaurant" class="container" >
 		<label for="nome">Nome Ristorante:*</label> 
 		<input class="form-control" type="text" 
 				placeholder="Nome ristorante"
