@@ -17,10 +17,11 @@ function validateLogin(username, password, e){
 function selezionaPiatto(id, prezzo, e){
 	if (e.currentTarget.checked) {
 		var piatto = new Piatto(id, prezzo);
-		piatti[id] = piatto;
+		piatti[id] = piatto;		
 	} else {
 		delete piatti[id];
 	}
+	
 }
 
 function validateRistorante(txtNome, txtDescrizione, txtUbicazione, ev){

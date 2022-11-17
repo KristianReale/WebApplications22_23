@@ -68,6 +68,31 @@ public class RistoranteDaoPostgres implements RistoranteDao{
 		}
 		return ristorante;
 	}
+	
+	@Override
+	public Ristorante findOneByName(String name) {
+		Ristorante ristorante = null;
+		String query = "select * from ristorante where nome = ?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, name);
+		
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				ristorante = new Ristorante();
+				ristorante.setId(rs.getLong("id"));
+				ristorante.setNome(rs.getString("nome"));
+				ristorante.setDescrizione(rs.getString("descrizione"));
+				ristorante.setUbicazione(rs.getString("cap_ubicazione"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ristorante;
+	}
 
 	@Override
 	public void saveOrUpdate(Ristorante ristorante) {

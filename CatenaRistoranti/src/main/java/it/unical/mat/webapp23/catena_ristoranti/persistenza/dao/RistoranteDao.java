@@ -11,5 +11,7 @@ public interface RistoranteDao {
 	
 	public void saveOrUpdate(Ristorante ristorante);
 	
-	public void delete(Ristorante ristorante);	
+	public void delete(Ristorante ristorante);
+
+	public Ristorante findOneByName(String name);	
 }
