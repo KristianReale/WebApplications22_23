@@ -25,9 +25,6 @@ public class aggiungiRistorantePage extends HttpServlet{
 				DBManager.getInstance().getPiattoDao().findAll();
 		req.setAttribute("piatti", piatti);
 		
-		
-		
-		
 		RequestDispatcher dispacher = req.getRequestDispatcher("views/aggiungiRistorante.html");
 		dispacher.forward(req, resp);
 	}

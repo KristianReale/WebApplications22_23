@@ -3,9 +3,8 @@ function Piatto(id, prezzo){
 	this.prezzo = prezzo;
 }
 
-
-
 piatti = new Object();
+const maxPrice = 34;
 
 function validateLogin(username, password, e){
 	if (username.value == ""){
@@ -15,9 +14,13 @@ function validateLogin(username, password, e){
 	
 }
 
-function selezionaPiatto(idPiatto, prezzo){
-	var piatto = new Piatto(idPiatto, prezzo);
-	piatti[idPiatto] = piatto;
+function selezionaPiatto(id, prezzo, e){
+	if (e.currentTarget.checked) {
+		var piatto = new Piatto(id, prezzo);
+		piatti[id] = piatto;
+	} else {
+		delete piatti[id];
+	}
 }
 
 function validateRistorante(txtNome, txtDescrizione, txtUbicazione, ev){
@@ -36,13 +39,32 @@ function validateRistorante(txtNome, txtDescrizione, txtUbicazione, ev){
 			canSubmit = false;
 		}
 	}
-	
 	if (txtUbicazione.value.trim() == ""){
 		alert("Inserisci cap")
 		canSubmit = false;
 	}
+	if (canSubmit){
+		let somma = calculateTotalPrice();
+		if (somma > maxPrice){
+			alert("Hai superato il limite massimo di prezzi che è: " + somma);		
+			canSubmit = false;
+		}else{
+			let numPiatti = Object.keys(piatti).length;
+			canSubmit = confirm("Il prezzo totale dei piatti è: " + somma 
+									+ "\nLa media è: " + somma / numPiatti
+									+ "\nContinuare?");
+		}
+	}
 	if (!canSubmit){
 		ev.preventDefault();
 	}
+}
+
+function calculateTotalPrice(){
+	var sommaPrezzi = 0;
 	
+	for (var piattoId in piatti){
+		sommaPrezzi += (piatti[piattoId].prezzo);
+	}
+	return sommaPrezzi;
 }
