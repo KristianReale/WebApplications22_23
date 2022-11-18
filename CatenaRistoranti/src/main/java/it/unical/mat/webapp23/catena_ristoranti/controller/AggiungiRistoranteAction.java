@@ -38,6 +38,6 @@ public class AggiungiRistoranteAction extends HttpServlet{
 			piattoDao.saveOrUpdate(piatto);
 		}
 		
-		resp.sendRedirect("aggiungiRistorante.html");
+		resp.sendRedirect("ristoranti");
 	}	
 }

@@ -21,19 +21,26 @@
 			<th>Nome Ristorante</th>
 			<th>Descrizione</th>
 			<th>CAP Ubicazione</th>
-
+			<th>Piatti Serviti</th>
 		</tr>
 		
-		<tr th:each="rist : ${lista_ristoranti}" >
-			<td th:text="${rist.nome}"></td>
-			<td th:text="${rist.descrizione}"></td>
-			<td th:text="${rist.ubicazione}"></td>
-
+		<tr th:each="rist : ${lista_ristoranti}" >			
+			<td th:text="${rist.ristorante.nome}"></td>
+			<td th:text="${rist.ristorante.descrizione}"></td>
+			<td th:text="${rist.ristorante.ubicazione}"></td>
+			<td>
+				<ol>
+					<li th:each="piatto : ${rist.piatti}" th:text="${piatto.nome}"></li> 
+				</ol>
+			</td>
 		</tr>
 	
 	</table>
+	<input type="button" id="aggiungi" class="btn btn-primary" value="Aggiungi Ristorante" />
+	<input type="button" id="rimuovi" class="btn btn-danger" value="Rimuovi Ristorante" />
+	<input type="button" id="salva" class="btn btn-success" value="Salva" />
 	<h2>Aggiungi un nuovo ristorante</h2>
-		<form method="post" action="/doAddRestaurant" class="container" >
+	<form method="post" action="/doAddRestaurant" class="container" >
 		<label for="nome">Nome Ristorante:*</label> 
 		<input class="form-control" type="text" 
 				placeholder="Nome ristorante"
@@ -61,11 +68,8 @@
 					</strong>
 					
 			</label>
-		</div>
-				 
-		<input type="button" id="aggiungi" class="btn btn-primary" value="Aggiungi Ristorante" />
-		<input type="submit" class="btn btn-success" value="SALVA"/>
-			
+		</div>				 	
+		<input type="submit" class="btn btn-success" value="Invia al server direttamente"/>			
 	</form>
 	
 </body>
