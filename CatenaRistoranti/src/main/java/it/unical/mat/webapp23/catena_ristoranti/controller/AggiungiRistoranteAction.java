@@ -32,6 +32,7 @@ public class AggiungiRistoranteAction extends HttpServlet{
 		r.setDescrizione(descrizione);
 		r.setUbicazione(ubicazione);
 		
+		
 		for (String p : piatti) {
 			Piatto piatto = piattoDao.findByPrimaryKey(Long.parseLong(p));
 			piatto.getRistoranti().add(r);

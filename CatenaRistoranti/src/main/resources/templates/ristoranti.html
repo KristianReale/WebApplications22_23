@@ -18,13 +18,15 @@
 	<p>In questa tabella puoi trovare tutti i ristoranti dove è possibile scrivere recensioni</p>
 	<table border="1">
 		<tr> 
+			<th></th>
 			<th>Nome Ristorante</th>
 			<th>Descrizione</th>
 			<th>CAP Ubicazione</th>
 			<th>Piatti Serviti</th>
 		</tr>
 		
-		<tr th:each="rist : ${lista_ristoranti}" >			
+		<tr th:each="rist : ${lista_ristoranti}" th:id="|riga_${rist.ristorante.id}|" >	
+			<td><input type="checkbox" th:value="${rist.ristorante.id}" class="ristorante" /></td>		
 			<td th:text="${rist.ristorante.nome}"></td>
 			<td th:text="${rist.ristorante.descrizione}"></td>
 			<td th:text="${rist.ristorante.ubicazione}"></td>
