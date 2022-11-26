@@ -56,8 +56,6 @@ public class ListaRecensioni extends HttpServlet{
 		
 		req.setAttribute("lista_ristoranti", rPiatti);
 		
-		
-		
 		RequestDispatcher dispacher = req.getRequestDispatcher("views/recensioni/recensioni.html");
 		dispacher.forward(req, resp);
 	}

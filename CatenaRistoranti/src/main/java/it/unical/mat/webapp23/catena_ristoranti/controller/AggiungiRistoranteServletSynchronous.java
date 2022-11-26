@@ -17,7 +17,7 @@ import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Piatto;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Ristorante;
 
 @WebServlet("/doAddRestaurant")
-public class AggiungiRistoranteAction extends HttpServlet{
+public class AggiungiRistoranteServletSynchronous extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PiattoDao piattoDao = DBManager.getInstance().getPiattoDao();

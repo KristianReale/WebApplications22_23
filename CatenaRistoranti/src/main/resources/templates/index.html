@@ -18,6 +18,7 @@
 			<h1 id="titolo">Gestione recensioni Catene di Ristoranti</h1>
 			<h2>Sito dedicato alla gestione di catene di ristoranti</h2>
 		</header>
+		<p th:if="${session.user != null}" th:text="|Benvenuto ${session.user.username}|" />
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -41,12 +42,11 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link">
-						Login
-					</a>
+					<a th:unless="${session.user != null}" class="nav-link" href="login.html">Login</a>
+					<a th:if="${session.user != null}" class="nav-link" href="doLogout">Logout</a>
 				</li>
 			</ul>
-		</nav>
+		</nav>		
 		<p> Benvenuto nel nostro sito di gestione della <strong>catena di ristoranti</strong>. L'applicazione consente agli utenti di 
 			visualizzare, aggiungere, modificare o elinare recensioni relative a catene di Ristoranti.
 		</p>
