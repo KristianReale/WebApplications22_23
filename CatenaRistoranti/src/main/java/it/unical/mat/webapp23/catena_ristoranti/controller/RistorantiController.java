@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import it.unical.mat.webapp23.catena_ristoranti.controller.ListaRistoranti.RistorantePiatto;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.DBManager;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.PiattoDao;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Piatto;
@@ -33,8 +32,8 @@ public class RistorantiController {
 		r.setUbicazione(ubicazione);
 		
 		
-		for (String p : piatto) {
-			Piatto p = piattoDao.findByPrimaryKey(Long.parseLong(p));
+		for (String pStr : piatto) {
+			Piatto p = piattoDao.findByPrimaryKey(Long.parseLong(pStr));
 			p.getRistoranti().add(r);
 			piattoDao.saveOrUpdate(p);
 		}

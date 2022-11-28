@@ -19,24 +19,6 @@ import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Ristorante;
 
 @WebServlet("/recensioni")
 public class ListaRecensioni extends HttpServlet{
-	class RistorantePiatto {
-		Ristorante ristorante;
-		List<Piatto> piatti;
-		
-		public Ristorante getRistorante() {
-			return ristorante;
-		}
-		public void setRistorante(Ristorante ristorante) {
-			this.ristorante = ristorante;
-		}
-		public List<Piatto> getPiatti() {
-			return piatti;
-		}
-		public void setPiatti(List<Piatto> piatti) {
-			this.piatti = piatti;
-		}
-	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<RistorantePiatto> rPiatti = new ArrayList<RistorantePiatto>();
