@@ -6,6 +6,8 @@ function Piatto(id, prezzo){
 piatti = new Object();
 const maxPrice = 34;
 //alert(maxPrice);
+var ristDaAggiungere = new Array();
+var ristDaRimuovere = new Array();
 
 window.addEventListener("load", function(){
 	var elForm = document.getElementsByTagName("form")[0];
@@ -24,6 +26,14 @@ window.addEventListener("load", function(){
 		var nome = txtNome.value;
 		var descrizione = txtDescrizione.value;
 		var ubicazione = txtUbicazione.value;
+		
+		var newRist = {
+			"nome": nome,
+			"descrizione" : descrizione,
+			"ubicazione" : ubicazione
+		}
+		ristDaAggiungere.push(newRist);
+		
 		
 		var newTr = document.createElement("tr");
 		var newTdVuoto = document.createElement("td");
@@ -58,6 +68,29 @@ window.addEventListener("load", function(){
 			var idRiga = "riga_" + idRist;
 			var riga = document.querySelector("#" + idRiga);
 			riga.style = "text-decoration: line-through";
+			
+			ristDaRimuovere.push(idRist);
+		});
+	});
+	
+	var butSave = document.getElementById("salva");
+	butSave.addEventListener("click", function(event){
+		var json = JSON.stringify(ristDaAggiungere);
+		$.ajax({
+			"method": "post",
+			"url": "/newRistorante",
+			"data": json,
+			"contentType" : "application/json",
+			"success": function(risposta){
+				console.log(risposta);
+				//JSON.parse(risposta)
+				if (risposta.message === "OK"){
+					var allTrs = document.querySelectorAll("tr");
+					allTrs.forEach(function(elem){
+						elem.style.removeProperty("font-weight");
+					});
+				}
+			}
 		});
 	});
 	
