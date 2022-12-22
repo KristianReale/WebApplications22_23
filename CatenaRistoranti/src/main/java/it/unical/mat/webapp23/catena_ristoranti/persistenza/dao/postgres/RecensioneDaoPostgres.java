@@ -119,10 +119,10 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 			}
 		}else {
 			String updateStr = "UPDATE recensione set titolo = ?, "
-													+ "testo = ? "
-													+ "numero_mi_piace = ? "
-													+ "numero_non_mi_piace = ? "
-													+ "ristorante = ? "
+													+ "testo = ?, "
+													+ "numero_mi_piace = ?, "
+													+ "numero_non_mi_piace = ?, "
+													+ "ristorante = ?, "
 													+ "scritta_da = ? "
 													+ "where id = ?";
 			

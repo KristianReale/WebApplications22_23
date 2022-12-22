@@ -102,10 +102,10 @@ public class UtenteDaoPostgres implements UtenteDao{
 				e.printStackTrace();
 			}
 		}else {
-			String updateStr = "UPDATE utente set password = ? "
-												+ "nome = ? "
-												+ "cognome = ? "
-												+ "data_nascita = ? "
+			String updateStr = "UPDATE utente set password = ?, "
+												+ "nome = ?, "
+												+ "cognome = ?, "
+												+ "data_nascita = ?, "
 												+ "ruolo = ? "
 												+ "where username = ?";
 			
