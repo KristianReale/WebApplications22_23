@@ -2,6 +2,7 @@ package it.unical.mat.webapp23.catena_ristoranti.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,11 +31,16 @@ public class LoginServlet extends HttpServlet{
 				logged = true;
 				HttpSession session = req.getSession();
 				session.setAttribute("user", utente);
+				session.setAttribute("sessionId", session.getId());
+				
+				req.getServletContext().setAttribute(session.getId(), session);
 			}else {
 				logged = false;
 			}
 		}
 		if (logged) {
+//			RequestDispatcher dispacher = req.getRequestDispatcher("views/index.html");
+//			dispacher.forward(req, resp);
 			resp.sendRedirect("/");
 		}else {
 			resp.sendRedirect("/notAuthorized.html");

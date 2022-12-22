@@ -12,16 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Utente;
 
-@WebServlet("/")
+
+@WebServlet("")
 public class HomeServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		Utente u = (Utente)session.getAttribute("user");
-		if (u != null) {
-			req.setAttribute("user", u);
-		}
-		
+		System.out.println(session.getId());
+
 		RequestDispatcher dispacher = req.getRequestDispatcher("views/index.html");
 		dispacher.forward(req, resp);
 	}

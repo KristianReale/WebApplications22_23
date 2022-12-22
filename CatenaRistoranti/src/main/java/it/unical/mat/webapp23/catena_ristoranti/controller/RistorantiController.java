@@ -13,10 +13,13 @@ import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.PiattoDao;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Piatto;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Ristorante;
 
+//Questa classe utilizza Spring MVC al posto delle Servlet per restituire viste 
+//dinamiche
 @Controller
 public class RistorantiController {
+	//"Sostituisce la servlet 'AggiungiRistoranteServletSynchronous'"
 	@PostMapping("/doAddRestaurant")
-	public void addRistorante(String nome, String descrizione, 
+	public String addRistorante(String nome, String descrizione, 
 								String ubicazione, String [] piatto) {
 		
 		PiattoDao piattoDao = DBManager.getInstance().getPiattoDao();
@@ -38,9 +41,11 @@ public class RistorantiController {
 			piattoDao.saveOrUpdate(p);
 		}
 		
-//		resp.sendRedirect("ristoranti");
+		return "redirect:ristoranti";
+		//resp.sendRedirect("ristoranti");
 	}
 	
+	//"Sostituisce la servlet 'ListaRistoranti'"
 	@GetMapping("/ristoranti")
 	public String ristoranti(Model model) {
 		List<RistorantePiatto> rPiatti = new ArrayList<RistorantePiatto>();

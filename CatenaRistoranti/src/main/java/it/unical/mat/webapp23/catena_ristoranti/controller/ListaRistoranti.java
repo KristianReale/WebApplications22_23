@@ -16,7 +16,8 @@ import it.unical.mat.webapp23.catena_ristoranti.persistenza.dao.PiattoDao;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Piatto;
 import it.unical.mat.webapp23.catena_ristoranti.persistenza.model.Ristorante;
 
-@WebServlet("/ristoranti")
+@WebServlet("/ristorantiServlet") 
+@Deprecated //"Sostituita con Spring MVC (vedi classe 'RistorantiController'"
 public class ListaRistoranti extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
